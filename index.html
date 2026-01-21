@@ -28,9 +28,11 @@ button:hover { background:#ef6c00; }
 .prev { left:10px; } .next { right:10px; }
 .video-gallery { display:flex; flex-wrap:wrap; gap:15px; justify-content:center; }
 .video-card { text-align:center; position:relative; }
-.video-card button { position:absolute; top:5px; right:5px; background:red; font-size:12px; padding:3px 6px; }
+.video-card button { position:absolute; top:5px; right:5px; background:red; font-size:12px; padding:3px 6px; display:none; }
+.admin-btn { margin:10px 5px; display:none; }
 .social-icons { text-align:center; margin:20px 0; }
 .social-icons a img { width:40px; margin:0 10px; }
+#adminPanel { display:none; padding:10px; background:#f3f3f3; border-radius:10px; margin-bottom:20px; }
 </style>
 </head>
 <body>
@@ -46,9 +48,19 @@ button:hover { background:#ef6c00; }
         <a href="#chronic">الأمراض المزمنة</a>
         <a href="#about">عن الأخصائي</a>
     </nav>
+    <button onclick="toggleAdminLogin()">تعديل الموقع</button>
 </header>
 
 <div class="container">
+
+<!-- Admin Panel -->
+<div id="adminPanel">
+    <h3>وضع تعديل الموقع</h3>
+    <button class="admin-btn" onclick="changeLogo()">تغيير اللوجو</button>
+    <button class="admin-btn" onclick="changeProfile()">تغيير الصورة الشخصية</button>
+    <button class="admin-btn" onclick="clearImages()">مسح كل الصور</button>
+    <button class="admin-btn" onclick="clearVideos()">مسح كل الفيديوهات</button>
+</div>
 
 <!-- Landing Page -->
 <div id="landing" class="landing">
@@ -100,15 +112,12 @@ button:hover { background:#ef6c00; }
 <div id="success" class="card">
     <h2>قصص النجاح</h2>
     <input type="file" id="imageInput" multiple accept="image/*" style="display:none;" onchange="loadImages(event)">
-    <div class="carousel" onclick="document.getElementById('imageInput').click()">
+    <div class="carousel" onclick="adminMode ? document.getElementById('imageInput').click() : null">
         <div class="slides" id="slidesContainer">
             <div class="slide" style="display:block; text-align:center;">
-                <p style="color:#555;">اضغط هنا لاختيار الصور من جهازك</p>
+                <p style="color:#555;">اضغط هنا لاختيار الصور من جهازك (لأدمن فقط)</p>
             </div>
         </div>
-        <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
-        <button class="next" onclick="plusSlides(1)">&#10095;</button>
-        <button onclick="clearImages()" style="margin-top:10px; background:red;">مسح كل الصور</button>
     </div>
 </div>
 
@@ -116,9 +125,8 @@ button:hover { background:#ef6c00; }
 <div id="videos" class="card">
     <h2>فيديوهات قصيرة</h2>
     <input type="file" id="videoInput" multiple accept="video/*" style="display:none;" onchange="loadVideos(event)">
-    <div class="video-gallery" onclick="document.getElementById('videoInput').click()" id="videoContainer">
-        <p style="color:#555;">اضغط هنا لإضافة الفيديوهات القصيرة</p>
-        <button onclick="clearVideos()" style="margin-top:10px; background:red;">مسح كل الفيديوهات</button>
+    <div class="video-gallery" onclick="adminMode ? document.getElementById('videoInput').click() : null" id="videoContainer">
+        <p style="color:#555;">اضغط هنا لإضافة الفيديوهات القصيرة (لأدمن فقط)</p>
     </div>
 </div>
 
@@ -150,26 +158,83 @@ button:hover { background:#ef6c00; }
 <div class="social-icons">
     <a href="https://www.tiktok.com/@yahia.ewis?_r=1&_t=ZS-93GH4690ojJ" target="_blank"><img src="tiktok-icon.png" alt="TikTok"></a>
     <a href="https://www.facebook.com/share/1D6NRfZxF3/" target="_blank"><img src="facebook-icon.png" alt="Facebook"></a>
-    <a href="https://www.linkedin.com/in/yehia-ewis?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><img src="linkedin-icon.png" alt="LinkedIn"></a>
+    <a href="https://www.linkedin.com/in/yehia-ewis?utm_source=share_via" target="_blank"><img src="linkedin-icon.png" alt="LinkedIn"></a>
 </div>
 
 </div>
 
 <script>
-// تغيير صورة شخصية
-document.getElementById("profilePic").onclick = function(){
-    let input = document.createElement("input");
+let adminMode=false;
+const adminPass="1234"; // كلمة السر للأدمن (يمكنك تعديلها)
+
+// تفعيل وضع الأدمن
+function toggleAdminLogin(){
+    let pass=prompt("أدخل كلمة سر الأدمن:");
+    if(pass===adminPass){
+        adminMode=true;
+        document.getElementById("adminPanel").style.display="block";
+        document.querySelectorAll(".admin-btn").forEach(b=>b.style.display="inline-block");
+        alert("وضع الأدمن مفعل. الآن يمكنك تعديل الصور والفيديوهات واللوجو.");
+    }else alert("كلمة السر غير صحيحة");
+}
+
+// تغيير اللوجو
+function changeLogo(){
+    let input=document.createElement("input");
     input.type="file"; input.accept="image/*";
-    input.onchange = function(e){
-        let reader = new FileReader();
+    input.onchange=function(e){
+        let reader=new FileReader();
+        reader.onload=function(ev){ document.getElementById("logo").src=ev.target.result; localStorage.setItem("logo", ev.target.result); };
+        reader.readAsDataURL(e.target.files[0]);
+    }
+    input.click();
+}
+
+// تغيير الصورة الشخصية
+function changeProfile(){
+    let input=document.createElement("input");
+    input.type="file"; input.accept="image/*";
+    input.onchange=function(e){
+        let reader=new FileReader();
         reader.onload=function(ev){ document.getElementById("profilePic").src=ev.target.result; localStorage.setItem("profilePic", ev.target.result); };
         reader.readAsDataURL(e.target.files[0]);
     }
     input.click();
 }
-window.onload = function(){
-    let savedProfile = localStorage.getItem("profilePic");
-    if(savedProfile) document.getElementById("profilePic").src = savedProfile;
+
+// استعادة الصورة واللوجو
+window.onload=function(){
+    let savedProfile=localStorage.getItem("profilePic");
+    if(savedProfile) document.getElementById("profilePic").src=savedProfile;
+    let savedLogo=localStorage.getItem("logo");
+    if(savedLogo) document.getElementById("logo").src=savedLogo;
+
+    // استعادة الصور
+    let savedImages=JSON.parse(localStorage.getItem("savedImages")||"[]");
+    const container=document.getElementById("slidesContainer");
+    if(savedImages.length>0){
+        container.innerHTML="";
+        savedImages.forEach((src,i)=>{
+            const div=document.createElement("div");
+            div.classList.add("slide");
+            div.innerHTML=`<img src="${src}" alt="قبل وبعد">`+(adminMode?'<button onclick="removeImage(this)">حذف</button>':'');
+            container.appendChild(div);
+            if(i===0) div.style.display="block";
+        });
+    }
+
+    // استعادة الفيديوهات
+    let savedV=JSON.parse(localStorage.getItem("savedVideos")||"[]");
+    const vContainer=document.getElementById("videoContainer");
+    if(savedV.length>0){
+        vContainer.innerHTML="";
+        savedV.forEach(src=>{
+            const div=document.createElement("div");
+            div.classList.add("video-card");
+            div.innerHTML=`<video width="250" controls><source src="${src}" type="video/mp4"></video>`+(adminMode?'<button onclick="removeVideo(this)">حذف</button>':'');
+            vContainer.appendChild(div);
+        });
+    }
 }
 
 // BMI + السعرات
@@ -189,19 +254,9 @@ function calculateBMIandCalories() {
     } else alert("من فضلك أدخل القيم الصحيحة");
 }
 
-// Carousel الصور
-let slideIndex = 1;
-function plusSlides(n){ showSlides(slideIndex += n); }
-function showSlides(n){
-    let slides=document.getElementsByClassName("slide");
-    if(slides.length===0) return;
-    if(n>slides.length){slideIndex=1;} if(n<1){slideIndex=slides.length;}
-    for(let i=0;i<slides.length;i++){slides[i].style.display="none";}
-    slides[slideIndex-1].style.display="block";
-}
-
-// رفع الصور
+// الصور
 function loadImages(event){
+    if(!adminMode) return;
     const files=event.target.files; const container=document.getElementById("slidesContainer");
     container.innerHTML="";
     let savedImages=[];
@@ -225,10 +280,11 @@ function removeImage(btn){
     savedImages=savedImages.filter(s=>s!==imgSrc);
     localStorage.setItem("savedImages", JSON.stringify(savedImages));
 }
-function clearImages(){ localStorage.removeItem("savedImages"); document.getElementById("slidesContainer").innerHTML=`<div class="slide" style="display:block; text-align:center;"><p style="color:#555;">اضغط هنا لاختيار الصور من جهازك</p></div>`; }
+function clearImages(){ localStorage.removeItem("savedImages"); const container=document.getElementById("slidesContainer"); container.innerHTML=`<div class="slide" style="display:block; text-align:center;"><p style="color:#555;">اضغط هنا لاختيار الصور من جهازك (لأدمن فقط)</p></div>`; }
 
-// رفع الفيديوهات
+// فيديوهات
 function loadVideos(event){
+    if(!adminMode) return;
     const files=event.target.files; const container=document.getElementById("videoContainer");
     container.innerHTML="";
     let savedVideos=[];
@@ -237,17 +293,4 @@ function loadVideos(event){
         reader.onload=function(e){
             const div=document.createElement("div");
             div.classList.add("video-card");
-            div.innerHTML=`<video width="250" controls><source src="${e.target.result}" type="video/mp4">متصفحك لا يدعم عرض الفيديو.</video><button onclick="removeVideo(this)">حذف</button>`;
-            container.appendChild(div);
-            savedVideos.push(e.target.result);
-            localStorage.setItem("savedVideos", JSON.stringify(savedVideos));
-        }; reader.readAsDataURL(files[i]);
-    }
-}
-function removeVideo(btn){ let div=btn.parentElement; div.remove(); let savedV=JSON.parse(localStorage.getItem("savedVideos")||"[]"); let vidSrc=div.querySelector("video source").src; savedV=savedV.filter(s=>s!==vidSrc); localStorage.setItem("savedVideos", JSON.stringify(savedV)); }
-function clearVideos(){ localStorage.removeItem("savedVideos"); document.getElementById("videoContainer").innerHTML=`<p style="color:#555;">اضغط هنا لإضافة الفيديوهات القصيرة</p><button onclick="clearVideos()" style="margin-top:10px; background:red;">مسح كل الفيديوهات</button>`; }
-
-// استعادة الصور والفيديوهات بعد الريفرش
-window.addEventListener("load",()=>{
-    // صور
-    let savedImages=JSON.parse(localStorage.getItem("saved
+            div.innerHTML=`<video

@@ -3,32 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حاسبة BMI</title>
+    <title>أدوات التغذية العلاجية</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            background-color: #f0f2f5;
             margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 10px;
         }
         .card {
             background-color: #fff;
-            padding: 20px;
             border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            text-align: center;
-            width: 90%;
-            max-width: 400px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
         }
-        input {
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        input, select {
             width: 90%;
             padding: 10px;
-            margin: 5px 0;
+            margin: 8px 0;
             border-radius: 8px;
             border: 1px solid #ccc;
+            font-size: 16px;
         }
         button {
             padding: 10px 20px;
@@ -39,32 +44,70 @@
             color: #fff;
             font-size: 16px;
             cursor: pointer;
+            width: 95%;
         }
         button:hover {
             background-color: #218838;
         }
-        p {
+        p.result {
             margin-top: 15px;
             font-weight: bold;
+            text-align: center;
+        }
+        .subtitle {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+        .activity-level {
+            font-size: 14px;
+            color: #555;
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h2>حاسبة BMI</h2>
-        <input type="number" id="weight" placeholder="الوزن بالكيلو">
-        <input type="number" id="height" placeholder="الطول بالمتر" step="0.01">
-        <button onclick="calculateBMI()">احسب</button>
-        <p id="result"></p>
+    <div class="container">
+        <!-- كارت BMI -->
+        <div class="card">
+            <h2>حاسبة BMI</h2>
+            <input type="number" id="bmi-weight" placeholder="الوزن بالكيلو">
+            <input type="number" id="bmi-height" placeholder="الطول بالمتر" step="0.01">
+            <button onclick="calculateBMI()">احسب BMI</button>
+            <p class="result" id="bmi-result"></p>
+        </div>
+
+        <!-- كارت السعرات اليومية -->
+        <div class="card">
+            <h2>حاسبة السعرات اليومية</h2>
+            <input type="number" id="cal-weight" placeholder="الوزن بالكيلو">
+            <input type="number" id="cal-height" placeholder="الطول بالسم">
+            <input type="number" id="cal-age" placeholder="العمر بالسنوات">
+            <select id="cal-gender">
+                <option value="">اختر الجنس</option>
+                <option value="male">ذكر</option>
+                <option value="female">أنثى</option>
+            </select>
+            <select id="cal-activity">
+                <option value="">اختر مستوى النشاط</option>
+                <option value="1.2">قليل النشاط</option>
+                <option value="1.375">نشاط خفيف</option>
+                <option value="1.55">نشاط متوسط</option>
+                <option value="1.725">نشاط عالي</option>
+                <option value="1.9">نشاط شديد</option>
+            </select>
+            <button onclick="calculateCalories()">احسب السعرات</button>
+            <p class="result" id="cal-result"></p>
+        </div>
     </div>
 
     <script>
+        // دالة BMI
         function calculateBMI() {
-            let weight = document.getElementById("weight").value;
-            let height = document.getElementById("height").value;
+            let weight = parseFloat(document.getElementById("bmi-weight").value);
+            let height = parseFloat(document.getElementById("bmi-height").value);
 
-            if(weight === "" || height === "") {
-                document.getElementById("result").innerText = "من فضلك أدخل كل البيانات";
+            if(!weight || !height) {
+                document.getElementById("bmi-result").innerText = "من فضلك أدخل كل البيانات";
                 return;
             }
 
@@ -72,7 +115,6 @@
             bmi = bmi.toFixed(2);
 
             let status = "";
-
             if (bmi < 18.5) 
                 status = "نحافة – جسمك يحتاج زيادة السعرات والبروتين لبناء كتلة صحية";
             else if (bmi < 25) 
@@ -82,8 +124,33 @@
             else 
                 status = "سمنة – استشارة أخصائي تغذية مهمة لتصميم برنامج صحي مناسب";
 
-            document.getElementById("result").innerText =
+            document.getElementById("bmi-result").innerText =
                 "BMI = " + bmi + " (" + status + ")";
+        }
+
+        // دالة السعرات اليومية
+        function calculateCalories() {
+            let weight = parseFloat(document.getElementById("cal-weight").value);
+            let height = parseFloat(document.getElementById("cal-height").value);
+            let age = parseFloat(document.getElementById("cal-age").value);
+            let gender = document.getElementById("cal-gender").value;
+            let activity = parseFloat(document.getElementById("cal-activity").value);
+
+            if(!weight || !height || !age || !gender || !activity) {
+                document.getElementById("cal-result").innerText = "من فضلك أدخل كل البيانات واختر جميع الخيارات";
+                return;
+            }
+
+            let BMR;
+            if(gender === "male") {
+                BMR = 10 * weight + 6.25 * height - 5 * age + 5;
+            } else {
+                BMR = 10 * weight + 6.25 * height - 5 * age - 161;
+            }
+
+            let calories = Math.round(BMR * activity);
+            document.getElementById("cal-result").innerText = 
+                "السعرات اليومية المطلوبة = " + calories + " سعرة حرارية";
         }
     </script>
 </body>

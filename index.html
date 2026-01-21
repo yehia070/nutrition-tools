@@ -163,3 +163,72 @@
     <p style="color:#555; font-size:14px;">ملاحظة: أي تعديل أو نظام جديد = دفع قيمة كشف جديد</p>
     <p style="font-weight:bold;">للحجز والتواصل: <a href="https://wa.me/218922994697" target="_blank">اضغط هنا للواتس</a></p>
 </div>
+<!-- كارت صور النجاحات -->
+<div class="card">
+    <h2>نجاحات العملاء</h2>
+    <div class="carousel">
+        <div class="slides">
+            <div class="slide"><img src="before1.jpg" alt="قبل" style="width:100%"><p>قبل - وزن: 96 كجم</p></div>
+            <div class="slide"><img src="after1.jpg" alt="بعد" style="width:100%"><p>بعد - وزن: 83 كجم</p></div>
+            <div class="slide"><img src="before2.jpg" alt="قبل" style="width:100%"><p>قبل - وزن: 105 كجم</p></div>
+            <div class="slide"><img src="after2.jpg" alt="بعد" style="width:100%"><p>بعد - وزن: 90 كجم</p></div>
+            <!-- ممكن تضيف صور إضافية بنفس الطريقة -->
+        </div>
+        <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+        <button class="next" onclick="plusSlides(1)">&#10095;</button>
+    </div>
+</div>
+
+<style>
+.carousel {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+    overflow: hidden;
+}
+.slides .slide {
+    display: none;
+    text-align: center;
+}
+.slides .slide img {
+    border-radius: 12px;
+}
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 8px;
+    margin-top: -20px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    user-select: none;
+}
+.prev { left: 10px; }
+.next { right: 10px; }
+</style>
+
+<script>
+let slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+function showSlides(n) {
+    let slides = document.getElementsByClassName("slide");
+    if (n > slides.length) {slideIndex = 1}    
+    if (n < 1) {slideIndex = slides.length}
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+    }
+    slides[slideIndex-1].style.display = "block";  
+}
+
+// العرض التلقائي كل 3 ثواني
+setInterval(function(){ plusSlides(1); }, 3000);
+</script>

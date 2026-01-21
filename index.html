@@ -3,159 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أدوات التغذية العلاجية</title>
+    <title>موقع أخصائي تغذية علاجية - د. يحيى عويس</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 500px;
-            margin: 20px auto;
-            padding: 10px;
-        }
-        .card {
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-        input, select {
-            width: 90%;
-            padding: 10px;
-            margin: 8px 0;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-        }
-        button {
-            padding: 10px 20px;
-            margin-top: 10px;
-            border: none;
-            border-radius: 8px;
-            background-color: #28a745;
-            color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-            width: 95%;
-        }
-        button:hover {
-            background-color: #218838;
-        }
-        p.result {
-            margin-top: 15px;
-            font-weight: bold;
-            text-align: center;
-        }
-        .subtitle {
-            margin-top: 10px;
-            font-weight: bold;
-            color: #555;
-        }
-        .activity-level {
-            font-size: 14px;
-            color: #555;
-        }
+        body { font-family: Arial, sans-serif; background: #f7f7f7; margin:0; padding:0; }
+        h2 { color: #333; }
+        .card { background: #fff; padding:20px; margin:20px auto; border-radius:12px; max-width:600px; box-shadow:0 4px 8px rgba(0,0,0,0.1); }
+        button { background:#f57c00; color:white; padding:10px 15px; border:none; border-radius:8px; cursor:pointer; transition:0.3s; }
+        button:hover { background:#ef6c00; }
+        a { color:#f57c00; text-decoration:none; }
+        /* Carousel الصور */
+        .carousel { position: relative; max-width:100%; margin:auto; overflow:hidden; cursor:pointer; min-height:200px; background:#f0f0f0; border-radius:12px; }
+        .slides .slide { display:none; text-align:center; }
+        .slides .slide img { border-radius:12px; max-width:100%; height:auto; }
+        .prev, .next { cursor:pointer; position:absolute; top:50%; width:auto; padding:8px; margin-top:-20px; color:white; font-weight:bold; font-size:20px; background:rgba(0,0,0,0.5); border-radius:50%; user-select:none; }
+        .prev { left:10px; } .next { right:10px; }
+
+        /* فيديوهات قصيرة */
+        .video-gallery { display:flex; flex-wrap:wrap; gap:15px; justify-content:center; }
+        .video-card { text-align:center; }
+        .video-card video { border-radius:12px; max-width:100%; }
+
+        /* قسم عن الأخصائي */
+        .card img { border-radius:50%; margin-bottom:10px; }
+
+        /* Hover effect للكروت */
+        .card:hover { transform: translateY(-3px); box-shadow:0 6px 12px rgba(0,0,0,0.15); transition:0.3s; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- كارت BMI -->
-        <div class="card">
-            <h2>حاسبة BMI</h2>
-            <input type="number" id="bmi-weight" placeholder="الوزن بالكيلو">
-            <input type="number" id="bmi-height" placeholder="الطول بالمتر" step="0.01">
-            <button onclick="calculateBMI()">احسب BMI</button>
-            <p class="result" id="bmi-result"></p>
-        </div>
 
-        <!-- كارت السعرات اليومية -->
-        <div class="card">
-            <h2>حاسبة السعرات اليومية</h2>
-            <input type="number" id="cal-weight" placeholder="الوزن بالكيلو">
-            <input type="number" id="cal-height" placeholder="الطول بالسم">
-            <input type="number" id="cal-age" placeholder="العمر بالسنوات">
-            <select id="cal-gender">
-                <option value="">اختر الجنس</option>
-                <option value="male">ذكر</option>
-                <option value="female">أنثى</option>
-            </select>
-            <select id="cal-activity">
-                <option value="">اختر مستوى النشاط</option>
-                <option value="1.2">قليل النشاط</option>
-                <option value="1.375">نشاط خفيف</option>
-                <option value="1.55">نشاط متوسط</option>
-                <option value="1.725">نشاط عالي</option>
-                <option value="1.9">نشاط شديد</option>
-            </select>
-            <button onclick="calculateCalories()">احسب السعرات</button>
-            <p class="result" id="cal-result"></p>
-        </div>
-    </div>
+<!-- BMI -->
+<div class="card">
+    <h2>حاسبة BMI</h2>
+    <label>الوزن (كجم): <input type="number" id="weight" placeholder="مثال: 70"></label><br><br>
+    <label>الطول (سم): <input type="number" id="height" placeholder="مثال: 170"></label><br><br>
+    <button onclick="calculateBMI()">احسب BMI</button>
+    <p id="bmiResult"></p>
+</div>
 
-    <script>
-        // دالة BMI
-        function calculateBMI() {
-            let weight = parseFloat(document.getElementById("bmi-weight").value);
-            let height = parseFloat(document.getElementById("bmi-height").value);
+<!-- السعرات اليومية -->
+<div class="card">
+    <h2>حاسبة السعرات اليومية</h2>
+    <label>الوزن (كجم): <input type="number" id="cWeight"></label><br><br>
+    <label>الطول (سم): <input type="number" id="cHeight"></label><br><br>
+    <label>العمر: <input type="number" id="cAge"></label><br><br>
+    <label>النشاط:
+        <select id="activity">
+            <option value="1.2">قليل النشاط</option>
+            <option value="1.375">نشاط خفيف</option>
+            <option value="1.55">نشاط متوسط</option>
+            <option value="1.725">نشاط عالي</option>
+            <option value="1.9">نشاط مكثف جدًا</option>
+        </select>
+    </label><br><br>
+    <button onclick="calculateCalories()">احسب السعرات</button>
+    <p id="calResult"></p>
+</div>
 
-            if(!weight || !height) {
-                document.getElementById("bmi-result").innerText = "من فضلك أدخل كل البيانات";
-                return;
-            }
-
-            let bmi = weight / (height * height);
-            bmi = bmi.toFixed(2);
-
-            let status = "";
-            if (bmi < 18.5) 
-                status = "نحافة – جسمك يحتاج زيادة السعرات والبروتين لبناء كتلة صحية";
-            else if (bmi < 25) 
-                status = "طبيعي – جسمك في حالة صحية، حافظ على نظام متوازن";
-            else if (bmi < 30) 
-                status = "زيادة وزن – حاول تقليل السعرات وممارسة نشاط بدني منتظم";
-            else 
-                status = "سمنة – استشارة أخصائي تغذية مهمة لتصميم برنامج صحي مناسب";
-
-            document.getElementById("bmi-result").innerText =
-                "BMI = " + bmi + " (" + status + ")";
-        }
-
-        // دالة السعرات اليومية
-        function calculateCalories() {
-            let weight = parseFloat(document.getElementById("cal-weight").value);
-            let height = parseFloat(document.getElementById("cal-height").value);
-            let age = parseFloat(document.getElementById("cal-age").value);
-            let gender = document.getElementById("cal-gender").value;
-            let activity = parseFloat(document.getElementById("cal-activity").value);
-
-            if(!weight || !height || !age || !gender || !activity) {
-                document.getElementById("cal-result").innerText = "من فضلك أدخل كل البيانات واختر جميع الخيارات";
-                return;
-            }
-
-            let BMR;
-            if(gender === "male") {
-                BMR = 10 * weight + 6.25 * height - 5 * age + 5;
-            } else {
-                BMR = 10 * weight + 6.25 * height - 5 * age - 161;
-            }
-
-            let calories = Math.round(BMR * activity);
-            document.getElementById("cal-result").innerText = 
-                "السعرات اليومية المطلوبة = " + calories + " سعرة حرارية";
-        }
-    </script>
-</body>
-</html>
-<!-- كارت الخدمة الفردية -->
+<!-- الخدمة الفردية -->
 <div class="card">
     <h2>الخدمة الفردية</h2>
     <p>كشف أولي + نظام غذائي مفصل حسب احتياجاتك</p>
@@ -163,72 +68,107 @@
     <p style="color:#555; font-size:14px;">ملاحظة: أي تعديل أو نظام جديد = دفع قيمة كشف جديد</p>
     <p style="font-weight:bold;">للحجز والتواصل: <a href="https://wa.me/218922994697" target="_blank">اضغط هنا للواتس</a></p>
 </div>
-<!-- كارت صور النجاحات -->
+
+<!-- Carousel صور النجاحات -->
 <div class="card">
     <h2>نجاحات العملاء</h2>
-    <div class="carousel">
-        <div class="slides">
-            <div class="slide"><img src="before1.jpg" alt="قبل" style="width:100%"><p>قبل - وزن: 96 كجم</p></div>
-            <div class="slide"><img src="after1.jpg" alt="بعد" style="width:100%"><p>بعد - وزن: 83 كجم</p></div>
-            <div class="slide"><img src="before2.jpg" alt="قبل" style="width:100%"><p>قبل - وزن: 105 كجم</p></div>
-            <div class="slide"><img src="after2.jpg" alt="بعد" style="width:100%"><p>بعد - وزن: 90 كجم</p></div>
-            <!-- ممكن تضيف صور إضافية بنفس الطريقة -->
+    <input type="file" id="imageInput" multiple accept="image/*" style="display:none;" onchange="loadImages(event)">
+    <div class="carousel" onclick="document.getElementById('imageInput').click()">
+        <div class="slides" id="slidesContainer">
+            <div class="slide" style="display:block; text-align:center;">
+                <p style="color:#555;">اضغط هنا لاختيار الصور من جهازك</p>
+            </div>
         </div>
         <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
         <button class="next" onclick="plusSlides(1)">&#10095;</button>
     </div>
 </div>
 
-<style>
-.carousel {
-    position: relative;
-    max-width: 100%;
-    margin: auto;
-    overflow: hidden;
-}
-.slides .slide {
-    display: none;
-    text-align: center;
-}
-.slides .slide img {
-    border-radius: 12px;
-}
-.prev, .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 8px;
-    margin-top: -20px;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-    background-color: rgba(0,0,0,0.5);
-    border-radius: 50%;
-    user-select: none;
-}
-.prev { left: 10px; }
-.next { right: 10px; }
-</style>
+<!-- قسم عن الأخصائي -->
+<div class="card" style="text-align:center; background:#fef6f0;">
+    <h2>عن الأخصائي</h2>
+    <img src="yourphoto.jpg" alt="د. يحيى عويس" style="width:150px;">
+    <h3>د. يحيى عويس أحمد</h3>
+    <p>أخصائي تغذية علاجية مع خبرة واسعة في علاج السمنة والنحافة، ومتابع لأحدث الأبحاث والمؤتمرات العالمية.</p>
+    <p>فلسفتي: تقديم خطة غذائية شخصية لكل عميل بطريقة مرنة وفعالة مع التركيز على الصحة العامة.</p>
+</div>
+
+<!-- فيديوهات قصيرة -->
+<div class="card">
+    <h2>فيديوهات قصيرة</h2>
+    <div class="video-gallery">
+        <!-- مثال فيديو فارغ -->
+        <div class="video-card">
+            <video width="250" controls>
+                <source src="video1.mp4" type="video/mp4">
+                متصفحك لا يدعم عرض الفيديو.
+            </video>
+            <p>نص قصير عن الفيديو</p>
+        </div>
+    </div>
+</div>
 
 <script>
+function calculateBMI() {
+    let w = parseFloat(document.getElementById("weight").value);
+    let h = parseFloat(document.getElementById("height").value)/100;
+    if(w>0 && h>0){
+        let bmi = (w/(h*h)).toFixed(1);
+        document.getElementById("bmiResult").innerText = "BMI: " + bmi;
+    } else {
+        alert("من فضلك أدخل القيم الصحيحة");
+    }
+}
+
+function calculateCalories() {
+    let w = parseFloat(document.getElementById("cWeight").value);
+    let h = parseFloat(document.getElementById("cHeight").value);
+    let age = parseInt(document.getElementById("cAge").value);
+    let activity = parseFloat(document.getElementById("activity").value);
+    if(w>0 && h>0 && age>0){
+        let bmr = (10*w + 6.25*h - 5*age + 5) * activity;
+        document.getElementById("calResult").innerText = "السعرات اليومية: " + Math.round(bmr) + " kcal";
+    } else {
+        alert("من فضلك أدخل القيم الصحيحة");
+    }
+}
+
+// Carousel الصور
 let slideIndex = 1;
-showSlides(slideIndex);
+let slides = document.getElementsByClassName("slide");
 
 function plusSlides(n) {
     showSlides(slideIndex += n);
 }
 
 function showSlides(n) {
-    let slides = document.getElementsByClassName("slide");
+    slides = document.getElementsByClassName("slide");
+    if (slides.length === 0) return;
     if (n > slides.length) {slideIndex = 1}    
     if (n < 1) {slideIndex = slides.length}
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";  
-    }
+    for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
     slides[slideIndex-1].style.display = "block";  
 }
 
-// العرض التلقائي كل 3 ثواني
+function loadImages(event) {
+    const files = event.target.files;
+    const container = document.getElementById("slidesContainer");
+    container.innerHTML = "";
+    for (let i = 0; i < files.length; i++) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const div = document.createElement("div");
+            div.classList.add("slide");
+            div.innerHTML = `<img src="${e.target.result}" alt="قبل وبعد">`;
+            container.appendChild(div);
+            if (i === 0) div.style.display = "block";
+        };
+        reader.readAsDataURL(files[i]);
+    }
+    slideIndex = 1;
+}
 setInterval(function(){ plusSlides(1); }, 3000);
 </script>
+
+</body>
+</html>

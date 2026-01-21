@@ -3,278 +3,235 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>موقع أخصائي تغذية علاجية - د. يحيى عويس</title>
+<title>يحيى عويس - أخصائي تغذية علاجية</title>
 <style>
-    body { font-family: Arial, sans-serif; margin:0; padding:0; background: linear-gradient(to bottom, #f0fff4, #fffaf0); }
-    header { display:flex; align-items:center; justify-content:space-between; padding:15px 20px; background:#f57c00; color:white; position:sticky; top:0; z-index:1000; }
-    header img { width:60px; border-radius:50%; }
-    nav a { color:white; margin:0 10px; text-decoration:none; font-weight:bold; }
-    nav a:hover { text-decoration:underline; }
-    .container { max-width:1000px; margin:auto; padding:20px; }
-    .card { background:#fff; padding:20px; margin:20px 0; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.1); transition:0.3s; }
-    .card:hover { transform: translateY(-3px); box-shadow:0 6px 12px rgba(0,0,0,0.15); }
-    h2 { color:#333; }
-    label { display:block; margin-bottom:5px; }
-    input[type=number], select { width:100%; padding:8px; margin-bottom:10px; border-radius:6px; border:1px solid #ccc; }
-    button { background:#f57c00; color:white; padding:10px 15px; border:none; border-radius:8px; cursor:pointer; transition:0.3s; }
-    button:hover { background:#ef6c00; }
-    /* Flex for landing */
-    .landing { display:flex; flex-wrap:wrap; align-items:center; gap:20px; margin-bottom:40px; }
-    .landing img { width:180px; border-radius:50%; }
-    .landing-text { flex:1; min-width:250px; }
-    /* Carousel الصور */
-    .carousel { position: relative; max-width:100%; margin:auto; overflow:hidden; cursor:pointer; min-height:200px; background:#f0f0f0; border-radius:12px; }
-    .slides .slide { display:none; text-align:center; }
-    .slides .slide img { border-radius:12px; max-width:100%; height:auto; }
-    .prev, .next { cursor:pointer; position:absolute; top:50%; width:auto; padding:8px; margin-top:-20px; color:white; font-weight:bold; font-size:20px; background:rgba(0,0,0,0.5); border-radius:50%; user-select:none; }
-    .prev { left:10px; } .next { right:10px; }
-    /* فيديوهات قصيرة */
-    .video-gallery { display:flex; flex-wrap:wrap; gap:15px; justify-content:center; }
-    .video-card { text-align:center; }
-    .video-card video { border-radius:12px; max-width:100%; }
-    /* السوشيال ميديا */
-    .social-icons { text-align:center; margin:20px 0; }
-    .social-icons a img { width:40px; margin:0 10px; }
+/* ======= CSS داخلي ======= */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fdf7f0;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #ffffff;
+    padding: 10px 20px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#logo {
+    height: 60px;
+}
+
+.profile-section {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+#profile-img {
+    width: 150px;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.profile-text h1 {
+    margin: 0;
+    font-size: 28px;
+    color: #2e7d32;
+}
+
+.profile-text p {
+    margin: 5px 0;
+}
+
+.bmi-section, .success-section, .video-section, .booking-section {
+    padding: 20px;
+    background-color: #ffffff;
+    margin: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.success-gallery img {
+    width: 150px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.admin-btn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #2e7d32;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.admin-btn:hover {
+    background-color: #1b5e20;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #e8f5e9;
+}
 </style>
 </head>
 <body>
 
-<!-- Header + Navbar -->
+<!-- ======= لوجو ======= -->
 <header>
-    <img src="yourphoto.jpg" alt="د. يحيى عويس">
-    <nav>
-        <a href="#landing">الرئيسية</a>
-        <a href="#bmi">BMI</a>
-        <a href="#online">كشف أونلاين</a>
-        <a href="#success">قصص النجاح</a>
-        <a href="#videos">فيديوهات</a>
-        <a href="#chronic">الأمراض المزمنة</a>
-        <a href="#about">عن الأخصائي</a>
-    </nav>
+    <img src="logo.png" alt="Logo" id="logo">
 </header>
 
-<div class="container">
-
-<!-- Landing Page -->
-<div id="landing" class="landing">
-    <img src="yourphoto.jpg" alt="د. يحيى عويس">
-    <div class="landing-text">
-        <h1>د. يحيى عويس أحمد</h1>
-        <p>أخصائي تغذية علاجية مع خبرة واسعة في علاج السمنة والنحافة، ومتابع لأحدث الأبحاث والمؤتمرات العالمية.</p>
-        <p>فلسفتي: تقديم خطة غذائية شخصية لكل عميل بطريقة مرنة وفعالة مع التركيز على الصحة العامة.</p>
+<!-- ======= صورتك الشخصية والكلام ======= -->
+<section class="profile-section">
+    <img src="profile.png" alt="صورتك" id="profile-img">
+    <div class="profile-text">
+        <h1>يحيى عويس</h1>
+        <p>أخصائي تغذية علاجية</p>
+        <p>خبرة في السمنة والنحافة والعلاج الغذائي</p>
     </div>
-</div>
+</section>
 
-<!-- BMI -->
-<div id="bmi" class="card">
-    <h2>حاسبة BMI</h2>
-    <p>مؤشر كتلة الجسم (BMI) يوضح درجة السمنة أو النحافة لديك ويعطي فكرة عن وضعك الصحي العام.</p>
-    <label>الوزن (كجم): <input type="number" id="weight" placeholder="مثال: 70"></label>
-    <label>الطول (سم): <input type="number" id="height" placeholder="مثال: 170"></label>
-    <label>الجنس:
-        <select id="gender">
-            <option value="male">ذكر</option>
-            <option value="female">أنثى</option>
-        </select>
-    </label>
-    <label>العمر: <input type="number" id="age" placeholder="مثال: 30"></label>
-    <label>النشاط:
-        <select id="activity">
-            <option value="1.2">قليل النشاط</option>
-            <option value="1.375">نشاط خفيف</option>
-            <option value="1.55">نشاط متوسط</option>
-            <option value="1.725">نشاط عالي</option>
-            <option value="1.9">نشاط مكثف جدًا</option>
-        </select>
-    </label>
-    <button onclick="calculateBMIandCalories()">احسب BMI والسعرات</button>
-    <p id="bmiResult"></p>
-    <p id="calResult"></p>
-</div>
+<!-- ======= حساب BMI والسعرات ======= -->
+<section class="bmi-section">
+    <h2>حاسبة BMI والسعرات الحرارية</h2>
+    <label>الوزن بالكجم:</label>
+    <input type="number" id="weight" placeholder="مثال: 70"><br><br>
+    <label>الطول بالسم:</label>
+    <input type="number" id="height" placeholder="مثال: 170"><br><br>
+    <label>العمر:</label>
+    <input type="number" id="age" placeholder="مثال: 30"><br><br>
+    <label>الجنس:</label>
+    <select id="gender">
+        <option value="male">ذكر</option>
+        <option value="female">أنثى</option>
+    </select><br><br>
+    <label>مستوى النشاط:</label>
+    <select id="activity">
+        <option value="1.2">قليل جدًا/جالس</option>
+        <option value="1.375">نشاط خفيف</option>
+        <option value="1.55">متوسط</option>
+        <option value="1.725">عالي</option>
+        <option value="1.9">شديد جدًا</option>
+    </select><br><br>
+    <button onclick="calculateBMI()">احسب</button>
+    <p id="bmi-result"></p>
+    <p id="calories-result"></p>
+</section>
 
-<!-- كشف أونلاين -->
-<div id="online" class="card">
-    <h2>لحجز كشف أونلاين مع نظام غذائي</h2>
-    <p>يمكنك حجز كشف أولي + نظام غذائي مفصل حسب احتياجاتك.</p>
-    <p>السعر: 10$ أو ما يعادلها بقيمة بلدك</p>
-    <p style="color:#555; font-size:14px;">ملاحظة: أي تعديل أو نظام جديد = دفع قيمة كشف جديد</p>
-    <p style="font-weight:bold;">للحجز والتواصل: <a href="https://wa.me/218922994697" target="_blank">اضغط هنا للواتس</a></p>
-</div>
-
-<!-- قصص النجاح -->
-<div id="success" class="card">
+<!-- ======= قصص النجاح ======= -->
+<section class="success-section">
     <h2>قصص النجاح</h2>
-    <input type="file" id="imageInput" multiple accept="image/*" style="display:none;" onchange="loadImages(event)">
-    <div class="carousel" onclick="document.getElementById('imageInput').click()">
-        <div class="slides" id="slidesContainer">
-            <div class="slide" style="display:block; text-align:center;">
-                <p style="color:#555;">اضغط هنا لاختيار الصور من جهازك</p>
-            </div>
-        </div>
-        <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
-        <button class="next" onclick="plusSlides(1)">&#10095;</button>
-    </div>
-</div>
+    <div class="success-gallery" id="success-gallery"></div>
+    <input type="file" id="upload-success" multiple>
+    <button onclick="clearSuccess()" class="admin-btn">مسح كل الصور (Admin فقط)</button>
+</section>
 
-<!-- فيديوهات قصيرة -->
-<div id="videos" class="card">
+<!-- ======= الفيديوهات القصيرة ======= -->
+<section class="video-section">
     <h2>فيديوهات قصيرة</h2>
-    <input type="file" id="videoInput" multiple accept="video/*" style="display:none;" onchange="loadVideos(event)">
-    <div class="video-gallery" onclick="document.getElementById('videoInput').click()" id="videoContainer">
-        <p style="color:#555;">اضغط هنا لإضافة الفيديوهات القصيرة</p>
-    </div>
-</div>
+    <div id="video-gallery"></div>
+    <input type="text" id="video-link" placeholder="ضع رابط الفيديو هنا">
+    <button onclick="addVideo()" class="admin-btn">أضف فيديو (Admin فقط)</button>
+</section>
 
-<!-- الأمراض المزمنة -->
-<div id="chronic" class="card">
-    <h2>الأمراض المزمنة</h2>
-    <p>حدد الحالات المزمنة التي تعاني منها (يمكن اختيار أكثر من حالة):</p>
-    <form id="chronicForm">
-        <input type="checkbox" id="diabetes1" name="chronic" value="سكر نوع 1">
-        <label for="diabetes1">سكر نوع 1</label><br>
-        <input type="checkbox" id="diabetes2" name="chronic" value="سكر نوع 2">
-        <label for="diabetes2">سكر نوع 2</label><br>
-        <input type="checkbox" id="hypertension" name="chronic" value="ضغط دم مرتفع">
-        <label for="hypertension">ضغط دم مرتفع</label><br>
-        <input type="checkbox" id="cholesterol" name="chronic" value="ارتفاع دهون الدم">
-        <label for="cholesterol">ارتفاع دهون الدم</label><br>
-        <input type="checkbox" id="heart" name="chronic" value="أمراض القلب">
-        <label for="heart">أمراض القلب</label><br>
-        <input type="checkbox" id="liverKidney" name="chronic" value="أمراض الكبد أو الكلى">
-        <label for="liverKidney">أمراض الكبد أو الكلى</label><br>
-        <input type="checkbox" id="digestive" name="chronic" value="أمراض هضمية">
-        <label for="digestive">أمراض هضمية (مثل القولون العصبي أو حساسية اللاكتوز)</label><br>
-        <input type="checkbox" id="thyroid" name="chronic" value="أمراض الغدة الدرقية">
-        <label for="thyroid">أمراض الغدة الدرقية</label><br>
-    </form>
-</div>
+<!-- ======= حجز كشف أونلاين ======= -->
+<section class="booking-section">
+    <h2>حجز كشف أونلاين مع نظام غذائي</h2>
+    <p>💰 10 دولار أو ما يعادلها بعملة بلدك</p>
+    <p>📱 واتساب: +218922994697</p>
+</section>
 
-<!-- عن الأخصائي -->
-<div id="about" class="card" style="text-align:center; background:#fef6f0;">
-    <h2>عن الأخصائي</h2>
-    <img src="yourphoto.jpg" alt="د. يحيى عويس" style="width:150px;">
-    <h3>د. يحيى عويس أحمد</h3>
-    <p>أخصائي تغذية علاجية مع خبرة واسعة في علاج السمنة والنحافة، ومتابع لأحدث الأبحاث والمؤتمرات العالمية.</p>
-    <p>فلسفتي: تقديم خطة غذائية شخصية لكل عميل بطريقة مرنة وفعالة مع التركيز على الصحة العامة.</p>
-</div>
-
-<!-- Social Media -->
-<div class="social-icons">
-    <a href="https://www.tiktok.com/@yahia.ewis?_r=1&_t=ZS-93GH4690ojJ" target="_blank">
-        <img src="tiktok-icon.png" alt="TikTok">
-    </a>
-    <a href="https://www.facebook.com/share/1D6NRfZxF3/" target="_blank">
-        <img src="facebook-icon.png" alt="Facebook">
-    </a>
-    <a href="https://www.linkedin.com/in/yehia-ewis?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">
-        <img src="linkedin-icon.png" alt="LinkedIn">
-    </a>
-</div>
-
-</div>
+<!-- ======= روابط السوشيال ميديا ======= -->
+<footer>
+    <h3>تابعنا على السوشيال ميديا</h3>
+    <a href="https://www.tiktok.com/@yahia.ewis?_r=1&_t=ZS-93GH4690ojJ" target="_blank">TikTok</a> |
+    <a href="https://www.facebook.com/share/1D6NRfZxF3/" target="_blank">Facebook</a> |
+    <a href="https://www.linkedin.com/in/yehia-ewis?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">LinkedIn</a>
+</footer>
 
 <script>
-// BMI + السعرات
-function calculateBMIandCalories() {
-    let w = parseFloat(document.getElementById("weight").value);
-    let h = parseFloat(document.getElementById("height").value)/100;
-    let age = parseInt(document.getElementById("age").value);
-    let gender = document.getElementById("gender").value;
-    let activity = parseFloat(document.getElementById("activity").value);
+// ======= JavaScript داخلي =======
 
-    if(w>0 && h>0 && age>0){
-        let bmi = (w/(h*h)).toFixed(1);
-        document.getElementById("bmiResult").innerText = "BMI: " + bmi;
+// حساب BMI والسعرات
+function calculateBMI(){
+    const weight = parseFloat(document.getElementById('weight').value);
+    const heightCm = parseFloat(document.getElementById('height').value);
+    const age = parseInt(document.getElementById('age').value);
+    const gender = document.getElementById('gender').value;
+    const activity = parseFloat(document.getElementById('activity').value);
 
-        let bmr;
-        if(gender === "male") bmr = (10*w + 6.25*(h*100) - 5*age + 5) * activity;
-        else bmr = (10*w + 6.25*(h*100) - 5*age - 161) * activity;
-
-        document.getElementById("calResult").innerText = "السعرات اليومية: " + Math.round(bmr) + " kcal";
-    } else alert("من فضلك أدخل القيم الصحيحة");
-}
-
-// Carousel الصور
-let slideIndex = 1;
-let slides = document.getElementsByClassName("slide");
-function plusSlides(n){ showSlides(slideIndex += n); }
-function showSlides(n){
-    slides = document.getElementsByClassName("slide");
-    if(slides.length === 0) return;
-    if(n>slides.length){slideIndex=1;}
-    if(n<1){slideIndex=slides.length;}
-    for(let i=0;i<slides.length;i++){slides[i].style.display="none";}
-    slides[slideIndex-1].style.display="block";
-}
-
-// رفع الصور + LocalStorage
-function loadImages(event){
-    const files=event.target.files;
-    const container=document.getElementById("slidesContainer");
-    container.innerHTML="";
-    let savedImages=[];
-    for(let i=0;i<files.length;i++){
-        const reader=new FileReader();
-        reader.onload=function(e){
-            const div=document.createElement("div");
-            div.classList.add("slide");
-            div.innerHTML=`<img src="${e.target.result}" alt="قبل وبعد">`;
-            container.appendChild(div);
-            if(i===0) div.style.display="block";
-            savedImages.push(e.target.result);
-            localStorage.setItem("savedImages", JSON.stringify(savedImages));
-        };
-        reader.readAsDataURL(files[i]);
+    if(!weight || !heightCm || !age){
+        alert("يرجى إدخال كل القيم المطلوبة");
+        return;
     }
-}
-window.onload=function(){
-    let saved=JSON.parse(localStorage.getItem("savedImages")||"[]");
-    if(saved.length>0){
-        const container=document.getElementById("slidesContainer");
-        container.innerHTML="";
-        saved.forEach((src,index)=>{
-            const div=document.createElement("div");
-            div.classList.add("slide");
-            div.style.display=(index===0)?"block":"none";
-            div.innerHTML=`<img src="${src}" alt="قبل وبعد">`;
-            container.appendChild(div);
-        });
-    }
-}
-setInterval(function(){ plusSlides(1); },3000);
 
-// رفع الفيديوهات + LocalStorage
-function loadVideos(event){
-    const files=event.target.files;
-    const container=document.getElementById("videoContainer");
-    container.innerHTML="";
-    let savedVideos=[];
-    for(let i=0;i<files.length;i++){
-        const reader=new FileReader();
-        reader.onload=function(e){
-            const div=document.createElement("div");
-            div.classList.add("video-card");
-            div.innerHTML=`<video width="250" controls><source src="${e.target.result}" type="video/mp4">متصفحك لا يدعم عرض الفيديو.</video>`;
-            container.appendChild(div);
-            savedVideos.push(e.target.result);
-            localStorage.setItem("savedVideos", JSON.stringify(savedVideos));
-        };
-        reader.readAsDataURL(files[i]);
+    const heightM = heightCm / 100;
+    const bmi = weight / (heightM * heightM);
+    let classification = "";
+
+    if(bmi < 18.5) classification = "نقص وزن";
+    else if(bmi < 25) classification = "وزن طبيعي";
+    else if(bmi < 30) classification = "زيادة وزن";
+    else if(bmi < 35) classification = "سمنة من الدرجة الأولى";
+    else if(bmi < 40) classification = "سمنة من الدرجة الثانية";
+    else classification = "سمنة مفرطة (درجة ثالثة)";
+
+    let bmr = 0;
+    if(gender === "male"){
+        bmr = 66 + (13.7 * weight) + (5 * heightCm) - (6.8 * age);
+    } else {
+        bmr = 655 + (9.6 * weight) + (1.8 * heightCm) - (4.7 * age);
     }
+
+    const calories = Math.round(bmr * activity);
+
+    document.getElementById('bmi-result').innerHTML = 
+        `BMI: ${bmi.toFixed(1)} → ${classification}`;
+    document.getElementById('calories-result').innerHTML =
+        `السعرات الحرارية اليومية الموصى بها: ${calories} kcal`;
 }
-window.addEventListener("load",()=>{
-    let savedV=JSON.parse(localStorage.getItem("savedVideos")||"[]");
-    if(savedV.length>0){
-        const container=document.getElementById("videoContainer");
-        container.innerHTML="";
-        savedV.forEach(src=>{
-            const div=document.createElement("div");
-            div.classList.add("video-card");
-            div.innerHTML=`<video width="250" controls><source src="${src}" type="video/mp4">متصفحك لا يدعم عرض الفيديو.</video>`;
-            container.appendChild(div);
-        });
+
+// رفع صور النجاح
+const uploadSuccess = document.getElementById('upload-success');
+const successGallery = document.getElementById('success-gallery');
+
+uploadSuccess.addEventListener('change', function() {
+    for(let i=0; i<this.files.length; i++){
+        const reader = new FileReader();
+        reader.onload = function(e){
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            successGallery.appendChild(img);
+        }
+        reader.readAsDataURL(this.files[i]);
     }
 });
+
+function clearSuccess(){
+    if(confirm("هل أنت متأكد من مسح كل الصور؟")){
+        successGallery.innerHTML = "";
+    }
+}
+
+// إضافة فيديو
+function addVideo(){
+    const link = document.getElementById('video-link').value;
+    if(link){
+        const iframe = document.createElement('iframe');
+        iframe.src = link;
+        iframe.width = "300";
+        iframe.height = "200";
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        document.getElementById('video-gallery').appendChild(iframe);
+        document.getElementById('video-link').value = "";
+    }
+}
 </script>
 
 </body>

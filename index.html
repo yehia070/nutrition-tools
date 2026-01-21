@@ -5,43 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>موقع أخصائي تغذية علاجية - د. يحيى عويس</title>
 <style>
-    body { font-family: Arial, sans-serif; margin:0; padding:0; background: linear-gradient(to bottom, #f0fff4, #fffaf0); }
-    header { display:flex; align-items:center; justify-content:space-between; padding:15px 20px; background:#f57c00; color:white; position:sticky; top:0; z-index:1000; }
-    header img { width:60px; border-radius:50%; }
-    nav a { color:white; margin:0 10px; text-decoration:none; font-weight:bold; }
-    nav a:hover { text-decoration:underline; }
-    .container { max-width:1000px; margin:auto; padding:20px; }
-    .card { background:#fff; padding:20px; margin:20px 0; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.1); transition:0.3s; }
-    .card:hover { transform: translateY(-3px); box-shadow:0 6px 12px rgba(0,0,0,0.15); }
-    h2 { color:#333; }
-    label { display:block; margin-bottom:5px; }
-    input[type=number], select { width:100%; padding:8px; margin-bottom:10px; border-radius:6px; border:1px solid #ccc; }
-    button { background:#f57c00; color:white; padding:10px 15px; border:none; border-radius:8px; cursor:pointer; transition:0.3s; }
-    button:hover { background:#ef6c00; }
-    /* Flex for landing */
-    .landing { display:flex; flex-wrap:wrap; align-items:center; gap:20px; margin-bottom:40px; }
-    .landing img { width:180px; border-radius:50%; }
-    .landing-text { flex:1; min-width:250px; }
-    /* Carousel الصور */
-    .carousel { position: relative; max-width:100%; margin:auto; overflow:hidden; cursor:pointer; min-height:200px; background:#f0f0f0; border-radius:12px; }
-    .slides .slide { display:none; text-align:center; }
-    .slides .slide img { border-radius:12px; max-width:100%; height:auto; }
-    .prev, .next { cursor:pointer; position:absolute; top:50%; width:auto; padding:8px; margin-top:-20px; color:white; font-weight:bold; font-size:20px; background:rgba(0,0,0,0.5); border-radius:50%; user-select:none; }
-    .prev { left:10px; } .next { right:10px; }
-    /* فيديوهات قصيرة */
-    .video-gallery { display:flex; flex-wrap:wrap; gap:15px; justify-content:center; }
-    .video-card { text-align:center; }
-    .video-card video { border-radius:12px; max-width:100%; }
-    /* السوشيال ميديا */
-    .social-icons { text-align:center; margin:20px 0; }
-    .social-icons a img { width:40px; margin:0 10px; }
+body { font-family: Arial, sans-serif; margin:0; padding:0; background: linear-gradient(to bottom, #f0fff4, #fffaf0); }
+header { display:flex; align-items:center; justify-content:space-between; padding:10px 20px; background:#f57c00; color:white; position:sticky; top:0; z-index:1000; }
+header img#logo { width:60px; height:60px; object-fit:cover; border-radius:12px; cursor:pointer; }
+nav a { color:white; margin:0 10px; text-decoration:none; font-weight:bold; }
+nav a:hover { text-decoration:underline; }
+.container { max-width:1000px; margin:auto; padding:20px; }
+.card { background:#fff; padding:20px; margin:20px 0; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.1); transition:0.3s; }
+.card:hover { transform: translateY(-3px); box-shadow:0 6px 12px rgba(0,0,0,0.15); }
+h2 { color:#333; }
+label { display:block; margin-bottom:5px; }
+input[type=number], select { width:100%; padding:8px; margin-bottom:10px; border-radius:6px; border:1px solid #ccc; }
+button { background:#f57c00; color:white; padding:10px 15px; border:none; border-radius:8px; cursor:pointer; transition:0.3s; }
+button:hover { background:#ef6c00; }
+.landing { display:flex; flex-wrap:wrap; align-items:center; gap:20px; margin-bottom:40px; }
+.landing img#profilePic { width:180px; border-radius:50%; cursor:pointer; }
+.landing-text { flex:1; min-width:250px; }
+.carousel { position: relative; max-width:100%; margin:auto; overflow:hidden; cursor:pointer; min-height:200px; background:#f0f0f0; border-radius:12px; }
+.slides .slide { display:none; text-align:center; }
+.slides .slide img { border-radius:12px; max-width:100%; height:auto; }
+.prev, .next { cursor:pointer; position:absolute; top:50%; width:auto; padding:8px; margin-top:-20px; color:white; font-weight:bold; font-size:20px; background:rgba(0,0,0,0.5); border-radius:50%; user-select:none; }
+.prev { left:10px; } .next { right:10px; }
+.video-gallery { display:flex; flex-wrap:wrap; gap:15px; justify-content:center; }
+.video-card { text-align:center; position:relative; }
+.video-card button { position:absolute; top:5px; right:5px; background:red; font-size:12px; padding:3px 6px; }
+.social-icons { text-align:center; margin:20px 0; }
+.social-icons a img { width:40px; margin:0 10px; }
 </style>
 </head>
 <body>
 
-<!-- Header + Navbar -->
 <header>
-    <img src="yourphoto.jpg" alt="د. يحيى عويس">
+    <img id="logo" src="logo.png" alt="Logo" title="اضغط لتغيير اللوجو">
     <nav>
         <a href="#landing">الرئيسية</a>
         <a href="#bmi">BMI</a>
@@ -57,7 +52,7 @@
 
 <!-- Landing Page -->
 <div id="landing" class="landing">
-    <img src="yourphoto.jpg" alt="د. يحيى عويس">
+    <img id="profilePic" src="yourphoto.jpg" alt="د. يحيى عويس" title="اضغط لتغيير الصورة">
     <div class="landing-text">
         <h1>د. يحيى عويس أحمد</h1>
         <p>أخصائي تغذية علاجية مع خبرة واسعة في علاج السمنة والنحافة، ومتابع لأحدث الأبحاث والمؤتمرات العالمية.</p>
@@ -113,6 +108,7 @@
         </div>
         <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
         <button class="next" onclick="plusSlides(1)">&#10095;</button>
+        <button onclick="clearImages()" style="margin-top:10px; background:red;">مسح كل الصور</button>
     </div>
 </div>
 
@@ -122,6 +118,7 @@
     <input type="file" id="videoInput" multiple accept="video/*" style="display:none;" onchange="loadVideos(event)">
     <div class="video-gallery" onclick="document.getElementById('videoInput').click()" id="videoContainer">
         <p style="color:#555;">اضغط هنا لإضافة الفيديوهات القصيرة</p>
+        <button onclick="clearVideos()" style="margin-top:10px; background:red;">مسح كل الفيديوهات</button>
     </div>
 </div>
 
@@ -149,31 +146,32 @@
     </form>
 </div>
 
-<!-- عن الأخصائي -->
-<div id="about" class="card" style="text-align:center; background:#fef6f0;">
-    <h2>عن الأخصائي</h2>
-    <img src="yourphoto.jpg" alt="د. يحيى عويس" style="width:150px;">
-    <h3>د. يحيى عويس أحمد</h3>
-    <p>أخصائي تغذية علاجية مع خبرة واسعة في علاج السمنة والنحافة، ومتابع لأحدث الأبحاث والمؤتمرات العالمية.</p>
-    <p>فلسفتي: تقديم خطة غذائية شخصية لكل عميل بطريقة مرنة وفعالة مع التركيز على الصحة العامة.</p>
-</div>
-
 <!-- Social Media -->
 <div class="social-icons">
-    <a href="https://www.tiktok.com/@yahia.ewis?_r=1&_t=ZS-93GH4690ojJ" target="_blank">
-        <img src="tiktok-icon.png" alt="TikTok">
-    </a>
-    <a href="https://www.facebook.com/share/1D6NRfZxF3/" target="_blank">
-        <img src="facebook-icon.png" alt="Facebook">
-    </a>
-    <a href="https://www.linkedin.com/in/yehia-ewis?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">
-        <img src="linkedin-icon.png" alt="LinkedIn">
-    </a>
+    <a href="https://www.tiktok.com/@yahia.ewis?_r=1&_t=ZS-93GH4690ojJ" target="_blank"><img src="tiktok-icon.png" alt="TikTok"></a>
+    <a href="https://www.facebook.com/share/1D6NRfZxF3/" target="_blank"><img src="facebook-icon.png" alt="Facebook"></a>
+    <a href="https://www.linkedin.com/in/yehia-ewis?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><img src="linkedin-icon.png" alt="LinkedIn"></a>
 </div>
 
 </div>
 
 <script>
+// تغيير صورة شخصية
+document.getElementById("profilePic").onclick = function(){
+    let input = document.createElement("input");
+    input.type="file"; input.accept="image/*";
+    input.onchange = function(e){
+        let reader = new FileReader();
+        reader.onload=function(ev){ document.getElementById("profilePic").src=ev.target.result; localStorage.setItem("profilePic", ev.target.result); };
+        reader.readAsDataURL(e.target.files[0]);
+    }
+    input.click();
+}
+window.onload = function(){
+    let savedProfile = localStorage.getItem("profilePic");
+    if(savedProfile) document.getElementById("profilePic").src = savedProfile;
+}
+
 // BMI + السعرات
 function calculateBMIandCalories() {
     let w = parseFloat(document.getElementById("weight").value);
@@ -181,36 +179,30 @@ function calculateBMIandCalories() {
     let age = parseInt(document.getElementById("age").value);
     let gender = document.getElementById("gender").value;
     let activity = parseFloat(document.getElementById("activity").value);
-
     if(w>0 && h>0 && age>0){
         let bmi = (w/(h*h)).toFixed(1);
         document.getElementById("bmiResult").innerText = "BMI: " + bmi;
-
         let bmr;
         if(gender === "male") bmr = (10*w + 6.25*(h*100) - 5*age + 5) * activity;
         else bmr = (10*w + 6.25*(h*100) - 5*age - 161) * activity;
-
         document.getElementById("calResult").innerText = "السعرات اليومية: " + Math.round(bmr) + " kcal";
     } else alert("من فضلك أدخل القيم الصحيحة");
 }
 
 // Carousel الصور
 let slideIndex = 1;
-let slides = document.getElementsByClassName("slide");
 function plusSlides(n){ showSlides(slideIndex += n); }
 function showSlides(n){
-    slides = document.getElementsByClassName("slide");
-    if(slides.length === 0) return;
-    if(n>slides.length){slideIndex=1;}
-    if(n<1){slideIndex=slides.length;}
+    let slides=document.getElementsByClassName("slide");
+    if(slides.length===0) return;
+    if(n>slides.length){slideIndex=1;} if(n<1){slideIndex=slides.length;}
     for(let i=0;i<slides.length;i++){slides[i].style.display="none";}
     slides[slideIndex-1].style.display="block";
 }
 
-// رفع الصور + LocalStorage
+// رفع الصور
 function loadImages(event){
-    const files=event.target.files;
-    const container=document.getElementById("slidesContainer");
+    const files=event.target.files; const container=document.getElementById("slidesContainer");
     container.innerHTML="";
     let savedImages=[];
     for(let i=0;i<files.length;i++){
@@ -218,35 +210,26 @@ function loadImages(event){
         reader.onload=function(e){
             const div=document.createElement("div");
             div.classList.add("slide");
-            div.innerHTML=`<img src="${e.target.result}" alt="قبل وبعد">`;
+            div.innerHTML=`<img src="${e.target.result}" alt="قبل وبعد"><button onclick="removeImage(this)">حذف</button>`;
             container.appendChild(div);
             if(i===0) div.style.display="block";
             savedImages.push(e.target.result);
             localStorage.setItem("savedImages", JSON.stringify(savedImages));
-        };
-        reader.readAsDataURL(files[i]);
+        }; reader.readAsDataURL(files[i]);
     }
 }
-window.onload=function(){
-    let saved=JSON.parse(localStorage.getItem("savedImages")||"[]");
-    if(saved.length>0){
-        const container=document.getElementById("slidesContainer");
-        container.innerHTML="";
-        saved.forEach((src,index)=>{
-            const div=document.createElement("div");
-            div.classList.add("slide");
-            div.style.display=(index===0)?"block":"none";
-            div.innerHTML=`<img src="${src}" alt="قبل وبعد">`;
-            container.appendChild(div);
-        });
-    }
+function removeImage(btn){
+    let div=btn.parentElement; div.remove();
+    let savedImages=JSON.parse(localStorage.getItem("savedImages")||"[]");
+    let imgSrc=div.querySelector("img").src;
+    savedImages=savedImages.filter(s=>s!==imgSrc);
+    localStorage.setItem("savedImages", JSON.stringify(savedImages));
 }
-setInterval(function(){ plusSlides(1); },3000);
+function clearImages(){ localStorage.removeItem("savedImages"); document.getElementById("slidesContainer").innerHTML=`<div class="slide" style="display:block; text-align:center;"><p style="color:#555;">اضغط هنا لاختيار الصور من جهازك</p></div>`; }
 
-// رفع الفيديوهات + LocalStorage
+// رفع الفيديوهات
 function loadVideos(event){
-    const files=event.target.files;
-    const container=document.getElementById("videoContainer");
+    const files=event.target.files; const container=document.getElementById("videoContainer");
     container.innerHTML="";
     let savedVideos=[];
     for(let i=0;i<files.length;i++){
@@ -254,28 +237,17 @@ function loadVideos(event){
         reader.onload=function(e){
             const div=document.createElement("div");
             div.classList.add("video-card");
-            div.innerHTML=`<video width="250" controls><source src="${e.target.result}" type="video/mp4">متصفحك لا يدعم عرض الفيديو.</video>`;
+            div.innerHTML=`<video width="250" controls><source src="${e.target.result}" type="video/mp4">متصفحك لا يدعم عرض الفيديو.</video><button onclick="removeVideo(this)">حذف</button>`;
             container.appendChild(div);
             savedVideos.push(e.target.result);
             localStorage.setItem("savedVideos", JSON.stringify(savedVideos));
-        };
-        reader.readAsDataURL(files[i]);
+        }; reader.readAsDataURL(files[i]);
     }
 }
-window.addEventListener("load",()=>{
-    let savedV=JSON.parse(localStorage.getItem("savedVideos")||"[]");
-    if(savedV.length>0){
-        const container=document.getElementById("videoContainer");
-        container.innerHTML="";
-        savedV.forEach(src=>{
-            const div=document.createElement("div");
-            div.classList.add("video-card");
-            div.innerHTML=`<video width="250" controls><source src="${src}" type="video/mp4">متصفحك لا يدعم عرض الفيديو.</video>`;
-            container.appendChild(div);
-        });
-    }
-});
-</script>
+function removeVideo(btn){ let div=btn.parentElement; div.remove(); let savedV=JSON.parse(localStorage.getItem("savedVideos")||"[]"); let vidSrc=div.querySelector("video source").src; savedV=savedV.filter(s=>s!==vidSrc); localStorage.setItem("savedVideos", JSON.stringify(savedV)); }
+function clearVideos(){ localStorage.removeItem("savedVideos"); document.getElementById("videoContainer").innerHTML=`<p style="color:#555;">اضغط هنا لإضافة الفيديوهات القصيرة</p><button onclick="clearVideos()" style="margin-top:10px; background:red;">مسح كل الفيديوهات</button>`; }
 
-</body>
-</html>
+// استعادة الصور والفيديوهات بعد الريفرش
+window.addEventListener("load",()=>{
+    // صور
+    let savedImages=JSON.parse(localStorage.getItem("saved
